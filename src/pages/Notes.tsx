@@ -50,10 +50,10 @@ const Notes = () => {
     return (
       <Collapsible key={folderName} defaultOpen={level < 2}>
         <CollapsibleTrigger 
-          className="flex items-center w-full text-left py-2 hover:bg-gray-50 rounded-lg px-2"
+          className="flex items-center w-full text-left py-2 hover:bg-gray-50 rounded-lg px-2 group"
           style={{ paddingLeft: `${(level * 1) + 0.5}rem` }}
         >
-          <ChevronRight className="h-4 w-4 mr-2 transition-transform duration-200 [&[data-state=open]>svg]:rotate-90" />
+          <ChevronRight className="h-4 w-4 mr-2 transition-transform duration-200 group-data-[state=open]:rotate-90" />
           <span className="font-medium text-gray-700">{folderName}</span>
           <span className="ml-2 text-sm text-gray-500">({folder.notes.length})</span>
         </CollapsibleTrigger>
