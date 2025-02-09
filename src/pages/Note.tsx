@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { notes } from "@/data/notes";
 import { 
   Breadcrumb,
@@ -93,21 +93,9 @@ const Note = () => {
                 
                 return !inline && match ? (
                   <SyntaxHighlighter
-                    style={{
-                      ...oneLight,
-                      'pre[class*="language-"]': {
-                        background: 'white',
-                      },
-                    }}
+                    style={oneDark}
                     language={match[1]}
                     PreTag="div"
-                    customStyle={{
-                      margin: '1.5em 0',
-                      padding: '1em',
-                      borderRadius: '0.5rem',
-                      border: 'none',
-                      background: 'white',
-                    }}
                     {...props}
                   >
                     {String(children).replace(/\n$/, '')}
