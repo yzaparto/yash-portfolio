@@ -4,50 +4,53 @@ import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import ReactMarkdown from "react-markdown";
 
-type Note = {
-  title: string;
-  date: string;
-  slug: string;
-};
-
-const notes: Note[] = [
-  { 
-    title: "Hello World",
-    date: "2025.02.09",
-    slug: "hello-world"
-  }
-];
-
 const Note = () => {
   const { noteId } = useParams();
-  const note = notes.find((n) => n.slug === noteId);
 
-  const { data: content, isLoading } = useQuery({
-    queryKey: ['note', noteId],
+  const { data: note, isLoading: isLoadingNote } = useQuery({
+    queryKey: ['note-metadata', noteId],
+    queryFn: async () => {
+      const response = await fetch(`/notes/${noteId}.md`);
+      if (!response.ok) {
+        throw new Error('Failed to load note');
+      }
+      const content = await response.text();
+      const lines = content.split('\n');
+      return {
+        title: lines[0].replace('# ', ''),
+        date: lines[1].trim(),
+        slug: noteId
+      };
+    },
+    enabled: !!noteId
+  });
+
+  const { data: content, isLoading: isLoadingContent } = useQuery({
+    queryKey: ['note-content', noteId],
     queryFn: async () => {
       const response = await fetch(`/notes/${noteId}.md`);
       if (!response.ok) {
         throw new Error('Failed to load note content');
       }
       const text = await response.text();
-      // Remove the first line (title) from the markdown content
+      // Remove the first two lines (title and date) from the markdown content
       return text.split('\n').slice(2).join('\n');
     },
     enabled: !!noteId
   });
 
-  if (!note) {
+  if (isLoadingNote || isLoadingContent) {
     return (
       <Layout>
-        <div>Note not found</div>
+        <div>Loading...</div>
       </Layout>
     );
   }
 
-  if (isLoading) {
+  if (!note) {
     return (
       <Layout>
-        <div>Loading...</div>
+        <div>Note not found</div>
       </Layout>
     );
   }
