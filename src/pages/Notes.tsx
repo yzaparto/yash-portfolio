@@ -67,7 +67,7 @@ const Notes = () => {
                 <div
                   key={note.slug}
                   className="group flex items-center min-w-0 cursor-pointer py-1"
-                  onClick={() => navigate(`notes/${note.slug}`)}
+                  onClick={() => navigate(`${note.slug}`)}
                 >
                   <a
                     href="#"
