@@ -21,7 +21,6 @@ const Note = () => {
   const { data: content, isLoading } = useQuery({
     queryKey: ['note', noteId],
     queryFn: async () => {
-      // Updated path to include base URL for GitHub Pages
       const response = await fetch(`${import.meta.env.BASE_URL}notes/${noteId}.md`);
       if (!response.ok) {
         throw new Error('Failed to load note content');
