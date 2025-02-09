@@ -34,5 +34,11 @@ export const notes: Note[] = [
     title: "Static Arrays",
     date: "2025.02.12",
     slug: "Python/Static Arrays"
+  },
+  {
+    title: "JavaScript Arrays",
+    date: "2025.02.13",
+    slug: "javascript-arrays",
+    folder: "Programming/JavaScript"
   }
 ];
