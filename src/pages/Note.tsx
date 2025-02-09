@@ -53,19 +53,19 @@ const Note = () => {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink as={Link} to="/notes">Notes</BreadcrumbLink>
+              <Link to="/notes" className="transition-colors hover:text-foreground">Notes</Link>
             </BreadcrumbItem>
             <BreadcrumbSeparator>
               <ChevronRight className="h-4 w-4" />
             </BreadcrumbSeparator>
             <BreadcrumbItem>
-              <BreadcrumbLink as={Link} to="/notes">{note.folder}</BreadcrumbLink>
+              <Link to="/notes" className="transition-colors hover:text-foreground">{note.folder}</Link>
             </BreadcrumbItem>
             <BreadcrumbSeparator>
               <ChevronRight className="h-4 w-4" />
             </BreadcrumbSeparator>
             <BreadcrumbItem>
-              <BreadcrumbLink>{note.title}</BreadcrumbLink>
+              <span className="transition-colors hover:text-foreground">{note.title}</span>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
