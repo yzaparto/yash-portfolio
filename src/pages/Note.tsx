@@ -93,7 +93,12 @@ const Note = () => {
                 
                 return !inline && match ? (
                   <SyntaxHighlighter
-                    style={oneLight}
+                    style={{
+                      ...oneLight,
+                      'pre[class*="language-"]': {
+                        background: 'white',
+                      },
+                    }}
                     language={match[1]}
                     PreTag="div"
                     customStyle={{
@@ -101,7 +106,7 @@ const Note = () => {
                       padding: '1em',
                       borderRadius: '0.5rem',
                       border: 'none',
-                      background: '#ffffff'
+                      background: 'white',
                     }}
                     {...props}
                   >
