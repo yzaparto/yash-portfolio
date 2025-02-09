@@ -16,16 +16,16 @@ const Notes = () => {
         {notes.map((note) => (
           <div
             key={note.title}
-            className="group flex items-center"
+            className="group flex items-center min-w-0"
           >
             <a
               href="#"
-              className="text-gray-900 group-hover:text-gray-600 transition-colors"
+              className="text-gray-900 group-hover:text-gray-600 transition-colors truncate"
             >
               {note.title}
             </a>
             <div className="flex-1 mx-4 border-b border-dotted border-gray-300" />
-            <span className="text-gray-400 text-sm">{note.date}</span>
+            <span className="text-gray-400 text-sm whitespace-nowrap">{note.date}</span>
           </div>
         ))}
       </div>
