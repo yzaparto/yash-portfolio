@@ -12,7 +12,7 @@ type Note = {
 const notes: Note[] = [
   { 
     title: "Hello World",
-    date: "2024.03.21",
+    date: "2025.02.09",
     content: `# Hello World
 
 Welcome to my first note.`
