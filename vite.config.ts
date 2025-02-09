@@ -5,7 +5,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  base: '/yash-portfolio/',
+  base: '/',
   server: {
     host: "::",
     port: 8080,
@@ -26,7 +26,6 @@ export default defineConfig(({ mode }) => ({
         manualChunks: undefined,
       },
     },
-    // Add a 404.html that's a copy of index.html to handle client-side routing
     assetsDir: 'assets',
     outDir: 'dist',
   },
