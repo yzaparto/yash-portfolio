@@ -89,20 +89,19 @@ const Note = () => {
             components={{
               code({ className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || '');
-                const inline = !className;
+                const inline = className?.includes('inline');
                 
                 return !inline && match ? (
                   <SyntaxHighlighter
                     style={oneDark}
                     language={match[1]}
                     PreTag="div"
-                    customStyle={{ background: 'white' }}
                     {...props}
                   >
                     {String(children).replace(/\n$/, '')}
                   </SyntaxHighlighter>
                 ) : (
-                  <code className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-800 font-mono text-sm" {...props}>
+                  <code className={className} {...props}>
                     {children}
                   </code>
                 );
