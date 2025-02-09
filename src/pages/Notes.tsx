@@ -1,7 +1,6 @@
 
 import { useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
-import { useQuery } from "@tanstack/react-query";
 
 type Note = {
   title: string;
@@ -9,57 +8,23 @@ type Note = {
   slug: string;
 };
 
+const notes: Note[] = [
+  { 
+    title: "Hello World",
+    date: "2025.02.09",
+    slug: "hello-world"
+  }
+];
+
 const Notes = () => {
   const navigate = useNavigate();
-  
-  const { data: notes = [], isLoading } = useQuery({
-    queryKey: ['notes-list'],
-    queryFn: async () => {
-      const response = await fetch('/notes/index.json');
-      if (!response.ok) {
-        const files = await fetch('/notes/');
-        const text = await files.text();
-        // Parse the directory listing HTML to extract .md files
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, 'text/html');
-        const links = Array.from(doc.querySelectorAll('a'))
-          .filter(a => a.textContent?.endsWith('.md'))
-          .map(a => a.textContent || '');
-        
-        // For each .md file, fetch its contents to get the title and date
-        const notes = await Promise.all(
-          links.map(async (filename) => {
-            const slug = filename.replace('.md', '');
-            const response = await fetch(`/notes/${filename}`);
-            const content = await response.text();
-            // Split by newlines and filter out empty lines
-            const lines = content.split('\n').filter(line => line.trim());
-            const title = lines[0].replace('# ', '').trim();
-            const date = lines[1].trim();
-            console.log('Parsed note:', { filename, title, date }); // Debug log
-            return { title, date, slug };
-          })
-        );
-        return notes;
-      }
-      return response.json();
-    }
-  });
-
-  if (isLoading) {
-    return (
-      <Layout>
-        <div>Loading...</div>
-      </Layout>
-    );
-  }
 
   return (
     <Layout>
       <div className="space-y-3">
         {notes.map((note) => (
           <div
-            key={note.slug}
+            key={note.title}
             className="group flex items-center min-w-0 cursor-pointer"
             onClick={() => navigate(`/notes/${note.slug}`)}
           >
