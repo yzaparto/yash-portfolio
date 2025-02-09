@@ -12,7 +12,7 @@ const Index = () => {
         </p>
         <div className="pt-4 flex">
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/yash-cmu/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-gray-600 transition-colors"
