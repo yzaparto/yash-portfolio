@@ -11,24 +11,24 @@ export const notes: Note[] = [
     title: "Hello World",
     date: "2025.02.09",
     slug: "hello-world",
-    folder: "Getting Started"
+    folder: "Getting Started/Introduction"
   },
   { 
     title: "Welcome Note",
     date: "2025.02.10",
     slug: "welcome",
-    folder: "Getting Started"
+    folder: "Getting Started/Introduction"
   },
   { 
     title: "First Project",
     date: "2025.02.11",
     slug: "first-project",
-    folder: "Projects"
+    folder: "Projects/Web Development"
   },
   { 
     title: "Check",
     date: "2025.02.11",
     slug: "check",
-    folder: "New"
+    folder: "New/Tests"
   }
 ];

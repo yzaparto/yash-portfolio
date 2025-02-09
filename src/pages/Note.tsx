@@ -7,7 +7,6 @@ import { notes } from "@/data/notes";
 import { 
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator 
 } from "@/components/ui/breadcrumb";
@@ -47,6 +46,8 @@ const Note = () => {
     );
   }
 
+  const folderPath = note.folder?.split('/') || ['Uncategorized'];
+
   return (
     <Layout>
       <div className="space-y-4">
@@ -55,12 +56,18 @@ const Note = () => {
             <BreadcrumbItem>
               <Link to="/notes" className="transition-colors hover:text-foreground">Notes</Link>
             </BreadcrumbItem>
-            <BreadcrumbSeparator>
-              <ChevronRight className="h-4 w-4" />
-            </BreadcrumbSeparator>
-            <BreadcrumbItem>
-              <Link to="/notes" className="transition-colors hover:text-foreground">{note.folder}</Link>
-            </BreadcrumbItem>
+            {folderPath.map((folder, index) => (
+              <React.Fragment key={folder}>
+                <BreadcrumbSeparator>
+                  <ChevronRight className="h-4 w-4" />
+                </BreadcrumbSeparator>
+                <BreadcrumbItem>
+                  <Link to="/notes" className="transition-colors hover:text-foreground">
+                    {folder}
+                  </Link>
+                </BreadcrumbItem>
+              </React.Fragment>
+            ))}
             <BreadcrumbSeparator>
               <ChevronRight className="h-4 w-4" />
             </BreadcrumbSeparator>
