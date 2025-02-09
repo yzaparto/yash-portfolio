@@ -29,5 +29,10 @@ export const notes: Note[] = [
     title: "Check",
     date: "2025.02.11",
     slug: "check"
+  },
+  { 
+    title: "Static Arrays",
+    date: "2025.02.12",
+    slug: "Python/Static Arrays"
   }
 ];
