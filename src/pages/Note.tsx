@@ -4,6 +4,15 @@ import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import ReactMarkdown from "react-markdown";
 import { notes } from "@/data/notes";
+import { 
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator 
+} from "@/components/ui/breadcrumb";
+import { ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Note = () => {
   const { noteId } = useParams();
@@ -41,6 +50,25 @@ const Note = () => {
   return (
     <Layout>
       <div className="space-y-4">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink as={Link} to="/notes">Notes</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator>
+              <ChevronRight className="h-4 w-4" />
+            </BreadcrumbSeparator>
+            <BreadcrumbItem>
+              <BreadcrumbLink as={Link} to="/notes">{note.folder}</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator>
+              <ChevronRight className="h-4 w-4" />
+            </BreadcrumbSeparator>
+            <BreadcrumbItem>
+              <BreadcrumbLink>{note.title}</BreadcrumbLink>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
         <div className="flex flex-col space-y-1">
           <div className="text-sm text-gray-500">{note.folder}</div>
           <div className="flex items-center justify-between">
