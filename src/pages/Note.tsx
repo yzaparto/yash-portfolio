@@ -8,13 +8,27 @@ type Note = {
   title: string;
   date: string;
   slug: string;
+  folder?: string;
 };
 
 const notes: Note[] = [
   { 
     title: "Hello World",
     date: "2025.02.09",
-    slug: "hello-world"
+    slug: "hello-world",
+    folder: "Getting Started"
+  },
+  { 
+    title: "Welcome Note",
+    date: "2025.02.10",
+    slug: "welcome",
+    folder: "Getting Started"
+  },
+  { 
+    title: "First Project",
+    date: "2025.02.11",
+    slug: "first-project",
+    folder: "Projects"
   }
 ];
 
@@ -30,7 +44,6 @@ const Note = () => {
         throw new Error('Failed to load note content');
       }
       const text = await response.text();
-      // Remove the first line (title) from the markdown content
       return text.split('\n').slice(2).join('\n');
     },
     enabled: !!noteId
@@ -55,9 +68,12 @@ const Note = () => {
   return (
     <Layout>
       <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-medium">{note.title}</h1>
-          <span className="text-gray-400">{note.date}</span>
+        <div className="flex flex-col space-y-1">
+          <div className="text-sm text-gray-500">{note.folder}</div>
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-medium">{note.title}</h1>
+            <span className="text-gray-400">{note.date}</span>
+          </div>
         </div>
         <div className="prose prose-gray max-w-none">
           <ReactMarkdown>{content || ''}</ReactMarkdown>
