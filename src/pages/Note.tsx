@@ -54,7 +54,7 @@ const Note = () => {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <Link to=".." className="transition-colors hover:text-foreground">Notes</Link>
+              <Link to="/notes" className="transition-colors hover:text-foreground">Notes</Link>
             </BreadcrumbItem>
             {folderPath.map((folder, index) => (
               <React.Fragment key={folder}>
@@ -62,7 +62,7 @@ const Note = () => {
                   <ChevronRight className="h-4 w-4" />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <Link to=".." className="transition-colors hover:text-foreground">
+                  <Link to="/notes" className="transition-colors hover:text-foreground">
                     {folder}
                   </Link>
                 </BreadcrumbItem>
