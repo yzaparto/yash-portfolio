@@ -1,7 +1,7 @@
 
 import Layout from "@/components/Layout";
 
-const thoughts = [
+const notes = [
   { title: "Another Enlightment", date: "2024.09.29" },
   { title: "Enlightment", date: "2023.07.02" },
   { title: "Good Design", date: "2022.11.05" },
@@ -9,22 +9,23 @@ const thoughts = [
   { title: "The Best Things", date: "2019.07.15" },
 ];
 
-const Thoughts = () => {
+const Notes = () => {
   return (
     <Layout>
-      <div className="space-y-6">
-        {thoughts.map((thought) => (
+      <div className="space-y-3">
+        {notes.map((note) => (
           <div
-            key={thought.title}
-            className="group flex justify-between items-center"
+            key={note.title}
+            className="group flex items-center"
           >
             <a
               href="#"
               className="text-gray-900 group-hover:text-gray-600 transition-colors"
             >
-              {thought.title}
+              {note.title}
             </a>
-            <span className="text-gray-400 text-sm">{thought.date}</span>
+            <div className="flex-1 mx-4 border-b border-dotted border-gray-300" />
+            <span className="text-gray-400 text-sm">{note.date}</span>
           </div>
         ))}
       </div>
@@ -32,4 +33,4 @@ const Thoughts = () => {
   );
 };
 
-export default Thoughts;
+export default Notes;

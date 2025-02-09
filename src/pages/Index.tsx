@@ -5,19 +5,12 @@ import { Github, Twitter, Linkedin } from "lucide-react";
 const Index = () => {
   return (
     <Layout>
-      <h1 className="text-3xl font-medium mb-8">Shu Ding</h1>
+      <h1 className="text-3xl font-medium mb-8">Yash Gupta</h1>
       <div className="space-y-6 text-gray-600">
         <p>
-          I am a designer and developer based in Berlin. My interests span a broad
-          spectrum of subjects, encompassing web development, creative coding, game
-          design, and human-computer interaction.
-        </p>
-        <p>
-          Since high school, I've spent years on algorithm competitions, freelance
-          web design and development. In 2017, I earned my BSc degree in Computer
-          Science from Fudan University in Shanghai, and joined as a software
-          engineer at Microsoft. In 2018, I joined Vercel to help build the next
-          generation of web development tools.
+          I am a software engineer based out of Palo Alto, California. My interests span a broad
+          spectrum of subjects, encompassing web development, creative coding, and
+          human-computer interaction.
         </p>
         <div className="pt-4 flex space-x-4">
           <a

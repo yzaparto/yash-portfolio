@@ -6,8 +6,7 @@ const Sidebar = () => {
   
   const links = [
     { path: "/", label: "about" },
-    { path: "/thoughts", label: "thoughts" },
-    { path: "/projects", label: "projects" },
+    { path: "/notes", label: "notes" },
   ];
 
   return (
