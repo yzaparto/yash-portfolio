@@ -3,34 +3,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import ReactMarkdown from "react-markdown";
-
-type Note = {
-  title: string;
-  date: string;
-  slug: string;
-  folder?: string;
-};
-
-const notes: Note[] = [
-  { 
-    title: "Hello World",
-    date: "2025.02.09",
-    slug: "hello-world",
-    folder: "Getting Started"
-  },
-  { 
-    title: "Welcome Note",
-    date: "2025.02.10",
-    slug: "welcome",
-    folder: "Getting Started"
-  },
-  { 
-    title: "First Project",
-    date: "2025.02.11",
-    slug: "first-project",
-    folder: "Projects"
-  }
-];
+import { notes } from "@/data/notes";
 
 const Note = () => {
   const { noteId } = useParams();

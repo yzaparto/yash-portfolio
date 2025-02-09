@@ -3,40 +3,13 @@ import { useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ChevronRight } from "lucide-react";
-
-type Note = {
-  title: string;
-  date: string;
-  slug: string;
-  folder?: string;
-};
-
-const notes: Note[] = [
-  { 
-    title: "Hello World",
-    date: "2025.02.09",
-    slug: "hello-world",
-    folder: "Getting Started"
-  },
-  { 
-    title: "Welcome Note",
-    date: "2025.02.10",
-    slug: "welcome",
-    folder: "Getting Started"
-  },
-  { 
-    title: "First Project",
-    date: "2025.02.11",
-    slug: "first-project",
-    folder: "Projects"
-  }
-];
+import { notes } from "@/data/notes";
 
 const Notes = () => {
   const navigate = useNavigate();
 
   // Group notes by folder
-  const notesByFolder = notes.reduce<Record<string, Note[]>>((acc, note) => {
+  const notesByFolder = notes.reduce<Record<string, typeof notes>>((acc, note) => {
     const folder = note.folder || "Uncategorized";
     if (!acc[folder]) {
       acc[folder] = [];
