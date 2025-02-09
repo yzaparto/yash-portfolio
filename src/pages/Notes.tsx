@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ChevronRight } from "lucide-react";
-import { notes } from "@/data/notes";
+import { notes, Note as NoteType } from "@/data/notes";
 
 type FolderStructure = {
   [key: string]: {
-    notes: typeof notes;
+    notes: NoteType[];
     subfolders: FolderStructure;
   };
 };
@@ -16,10 +16,10 @@ const Notes = () => {
   const navigate = useNavigate();
 
   // Create nested folder structure
-  const createFolderStructure = (notes: typeof notes): FolderStructure => {
+  const createFolderStructure = (notesList: NoteType[]): FolderStructure => {
     const structure: FolderStructure = {};
 
-    notes.forEach((note) => {
+    notesList.forEach((note) => {
       const folderPath = note.folder?.split('/') || ['Uncategorized'];
       let currentLevel = structure;
 
@@ -44,7 +44,7 @@ const Notes = () => {
 
   const renderFolder = (
     folderName: string,
-    folder: { notes: typeof notes; subfolders: FolderStructure },
+    folder: { notes: NoteType[]; subfolders: FolderStructure },
     level: number = 0
   ) => {
     return (
