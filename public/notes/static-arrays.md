@@ -8,7 +8,7 @@
 
 - To read an individual element from an array we can choose the position we want to access via an **index**. Below we have initialized an array of size `3` called `myArray`. We also attempt to access an arbitrary element using the index `i`.
 
-```
+```python
 # initialize myArray
 myArray = [1,3,5]
 
@@ -22,20 +22,18 @@ myArray[i]
 
 - We can also read all values within an array by traversing through it. Below are examples of how we could traverse `myArray` from the start to the end using loops.
 
-```
+```python
 for i in range(len(myArray)):
-	print(myArray[i])
+    print(myArray[i])
 
 # Or
 
 i = 0;
 while i < len(myArray):
-	print(myArray[i])
-	i++
-
+    print(myArray[i])
+    i++
 ```
 
 ==The last element in an array is always at index n−1 where n is the size of the array. If the size of our array is `3`, the last accessible index is `2`.==
 
 - To traverse through an array of size n the time complexity is O(n). This means the *number of operations grows linearly* with the size of the array.
-
