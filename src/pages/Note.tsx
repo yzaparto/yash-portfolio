@@ -29,7 +29,9 @@ const Note = () => {
       if (!response.ok) {
         throw new Error('Failed to load note content');
       }
-      return response.text();
+      const text = await response.text();
+      // Remove the first line (title) from the markdown content
+      return text.split('\n').slice(2).join('\n');
     },
     enabled: !!noteId
   });
