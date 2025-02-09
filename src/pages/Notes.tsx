@@ -5,16 +5,14 @@ import Layout from "@/components/Layout";
 type Note = {
   title: string;
   date: string;
-  content: string;
+  slug: string;
 };
 
 const notes: Note[] = [
   { 
     title: "Hello World",
     date: "2025.02.09",
-    content: `# Hello World
-
-Welcome to my first note.`
+    slug: "hello-world"
   }
 ];
 
@@ -28,7 +26,7 @@ const Notes = () => {
           <div
             key={note.title}
             className="group flex items-center min-w-0 cursor-pointer"
-            onClick={() => navigate(`/notes/${note.title.toLowerCase().replace(/ /g, '-')}`)}
+            onClick={() => navigate(`/notes/${note.slug}`)}
           >
             <a
               href="#"
