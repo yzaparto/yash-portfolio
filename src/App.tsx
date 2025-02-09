@@ -16,7 +16,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <TooltipProvider>
           <Routes>
             <Route path="/" element={<Index />} />
