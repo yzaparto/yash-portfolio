@@ -23,11 +23,8 @@ const Notes = () => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, 'text/html');
         const links = Array.from(doc.querySelectorAll('a'))
-          .filter(a => a.href.endsWith('.md'))
-          .map(a => {
-            const url = new URL(a.href);
-            return url.pathname.split('/').pop() || '';
-          });
+          .filter(a => a.textContent?.endsWith('.md'))
+          .map(a => a.textContent || '');
         
         // For each .md file, fetch its contents to get the title and date
         const notes = await Promise.all(
