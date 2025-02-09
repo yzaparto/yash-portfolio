@@ -8,6 +8,7 @@ import * as React from "react";
 
 import Index from "./pages/Index";
 import Notes from "./pages/Notes";
+import Note from "./pages/Note";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,7 +21,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/notes" element={<Notes />} />
-            <Route path="/notes/:noteId" element={<Notes />} />
+            <Route path="/notes/:noteId" element={<Note />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Toaster />
