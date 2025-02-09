@@ -28,7 +28,6 @@ export const notes: Note[] = [
   { 
     title: "Check",
     date: "2025.02.11",
-    slug: "check",
-    folder: "New/Tests"
+    slug: "check"
   }
 ];

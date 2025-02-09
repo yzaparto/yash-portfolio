@@ -78,7 +78,6 @@ const Note = () => {
           </BreadcrumbList>
         </Breadcrumb>
         <div className="flex flex-col space-y-1">
-          <div className="text-sm text-gray-500">{note.folder}</div>
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-medium">{note.title}</h1>
             <span className="text-gray-400">{note.date}</span>
