@@ -34,6 +34,9 @@ jobs:
       - name: Create 404 page
         run: cp dist/index.html dist/404.html
         
+      - name: Configure CNAME
+        run: echo "www.yashgupta.ai" > dist/CNAME
+        
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
