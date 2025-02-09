@@ -60,16 +60,16 @@ const Notes = () => {
     const totalNotes = getTotalNotes(folder);
     
     return (
-      <Collapsible key={folderName} defaultOpen={true}>
+      <Collapsible key={folderName} defaultOpen={false}>
         <CollapsibleTrigger 
-          className="flex items-center w-full text-left py-2 hover:bg-gray-50 rounded-lg px-2 group touch-manipulation"
+          className="flex items-center w-full text-left py-2 hover:bg-gray-50 rounded-lg px-2 group"
           style={{ paddingLeft: `${(level * 1) + 0.5}rem` }}
         >
-          <ChevronRight className="h-4 w-4 mr-2 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-90" />
+          <ChevronRight className="h-4 w-4 mr-2 transition-transform duration-200 group-data-[state=open]:rotate-90" />
           <span className="font-medium text-gray-700">{folderName}</span>
           <span className="ml-2 text-sm text-gray-500">({totalNotes})</span>
         </CollapsibleTrigger>
-        <CollapsibleContent className="animate-accordion-down">
+        <CollapsibleContent>
           <div className="space-y-2 mt-1">
             {Object.entries(folder.subfolders).map(([subfolderName, subfolder]) => (
               renderFolder(subfolderName, subfolder, level + 1)
@@ -78,7 +78,7 @@ const Notes = () => {
               {folder.notes.map((note) => (
                 <div
                   key={note.slug}
-                  className="group flex items-center min-w-0 cursor-pointer py-1 touch-manipulation"
+                  className="group flex items-center min-w-0 cursor-pointer py-1"
                   onClick={() => navigate(note.slug)}
                 >
                   <a
