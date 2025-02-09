@@ -60,7 +60,7 @@ const Notes = () => {
     const totalNotes = getTotalNotes(folder);
     
     return (
-      <Collapsible key={folderName} defaultOpen={level < 2}>
+      <Collapsible key={folderName} defaultOpen={false}>
         <CollapsibleTrigger 
           className="flex items-center w-full text-left py-2 hover:bg-gray-50 rounded-lg px-2 group"
           style={{ paddingLeft: `${(level * 1) + 0.5}rem` }}
