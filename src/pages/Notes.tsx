@@ -32,9 +32,11 @@ const Notes = () => {
             const slug = filename.replace('.md', '');
             const response = await fetch(`/notes/${filename}`);
             const content = await response.text();
-            const lines = content.split('\n');
-            const title = lines[0].replace('# ', '');
+            // Split by newlines and filter out empty lines
+            const lines = content.split('\n').filter(line => line.trim());
+            const title = lines[0].replace('# ', '').trim();
             const date = lines[1].trim();
+            console.log('Parsed note:', { filename, title, date }); // Debug log
             return { title, date, slug };
           })
         );
