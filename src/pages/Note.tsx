@@ -4,6 +4,8 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { notes } from "@/data/notes";
 import { 
   Breadcrumb,
@@ -83,7 +85,29 @@ const Note = () => {
           </div>
         </div>
         <div className="prose prose-gray max-w-none">
-          <ReactMarkdown>{content || ''}</ReactMarkdown>
+          <ReactMarkdown
+            components={{
+              code({node, inline, className, children, ...props}) {
+                const match = /language-(\w+)/.exec(className || '');
+                return !inline && match ? (
+                  <SyntaxHighlighter
+                    {...props}
+                    style={oneDark}
+                    language={match[1]}
+                    PreTag="div"
+                  >
+                    {String(children).replace(/\n$/, '')}
+                  </SyntaxHighlighter>
+                ) : (
+                  <code {...props} className={className}>
+                    {children}
+                  </code>
+                );
+              }
+            }}
+          >
+            {content || ''}
+          </ReactMarkdown>
         </div>
       </div>
     </Layout>
