@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import ReactMarkdown from "react-markdown";
@@ -12,7 +12,6 @@ import {
   BreadcrumbSeparator 
 } from "@/components/ui/breadcrumb";
 import { ChevronRight } from "lucide-react";
-import { Link } from "react-router-dom";
 
 const Note = () => {
   const { noteId } = useParams();
@@ -21,7 +20,7 @@ const Note = () => {
   const { data: content, isLoading } = useQuery({
     queryKey: ['note', noteId],
     queryFn: async () => {
-      const response = await fetch(`${import.meta.env.BASE_URL}notes/${noteId}.md`);
+      const response = await fetch(`${import.meta.env.BASE_URL}/notes/${noteId}.md`);
       if (!response.ok) {
         throw new Error('Failed to load note content');
       }
@@ -55,7 +54,7 @@ const Note = () => {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <Link to="/notes" className="transition-colors hover:text-foreground">Notes</Link>
+              <Link to="../notes" className="transition-colors hover:text-foreground">Notes</Link>
             </BreadcrumbItem>
             {folderPath.map((folder, index) => (
               <React.Fragment key={folder}>
@@ -63,7 +62,7 @@ const Note = () => {
                   <ChevronRight className="h-4 w-4" />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
-                  <Link to="/notes" className="transition-colors hover:text-foreground">
+                  <Link to="../notes" className="transition-colors hover:text-foreground">
                     {folder}
                   </Link>
                 </BreadcrumbItem>
