@@ -96,6 +96,12 @@ const Note = () => {
                     style={oneLight}
                     language={match[1]}
                     PreTag="div"
+                    customStyle={{
+                      margin: '1.5em 0',
+                      padding: '1em',
+                      borderRadius: '0.5rem',
+                      border: 'none'
+                    }}
                     {...props}
                   >
                     {String(children).replace(/\n$/, '')}
