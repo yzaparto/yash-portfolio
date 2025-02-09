@@ -24,12 +24,14 @@ const Notes = () => {
         const doc = parser.parseFromString(text, 'text/html');
         const links = Array.from(doc.querySelectorAll('a'))
           .filter(a => a.href.endsWith('.md'))
-          .map(a => a.href);
+          .map(a => {
+            const url = new URL(a.href);
+            return url.pathname.split('/').pop() || '';
+          });
         
         // For each .md file, fetch its contents to get the title and date
         const notes = await Promise.all(
-          links.map(async (link) => {
-            const filename = link.split('/').pop() || '';
+          links.map(async (filename) => {
             const slug = filename.replace('.md', '');
             const response = await fetch(`/notes/${filename}`);
             const content = await response.text();
