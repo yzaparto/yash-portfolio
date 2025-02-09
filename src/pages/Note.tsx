@@ -87,19 +87,21 @@ const Note = () => {
         <div className="prose prose-gray max-w-none">
           <ReactMarkdown
             components={{
-              code({node, inline, className, children, ...props}) {
+              code({ className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || '');
+                const inline = className?.includes('inline');
+                
                 return !inline && match ? (
                   <SyntaxHighlighter
-                    {...props}
                     style={oneDark}
                     language={match[1]}
                     PreTag="div"
+                    {...props}
                   >
                     {String(children).replace(/\n$/, '')}
                   </SyntaxHighlighter>
                 ) : (
-                  <code {...props} className={className}>
+                  <code className={className} {...props}>
                     {children}
                   </code>
                 );
