@@ -100,7 +100,8 @@ const Note = () => {
                       margin: '1.5em 0',
                       padding: '1em',
                       borderRadius: '0.5rem',
-                      border: 'none'
+                      border: 'none',
+                      background: '#ffffff'
                     }}
                     {...props}
                   >
