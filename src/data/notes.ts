@@ -39,7 +39,7 @@ export const notes: Note[] = [
   { 
     title: "Design Hashset",
     date: "2025.02.09",
-    slug: "design-hash",
+    slug: "design-hashset",
     folder: "Data Structures"
   }
 ];
