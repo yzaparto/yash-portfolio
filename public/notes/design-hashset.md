@@ -1,7 +1,8 @@
 
-### **Design a HashSet Without Using Any Built-in Hash Table Libraries**
+**Design a HashSet without using any built-in hash table libraries.**
 
-Leetcode Problem: https://leetcode.com/problems/design-hashset/description/
+[Leetcode Problem](https://leetcode.com/problems/design-hashset/description/)
+
 Implement the _MyHashSet_ class with the following methods:
 
 - **void add(key)**: Inserts the value key into the HashSet.
@@ -13,86 +14,48 @@ Implement the _MyHashSet_ class with the following methods:
 - At most 10^4 calls will be made to add, remove, and contains.
 
 ---
+**Implementation Details and Considerations**
 
-### **Implementation Details and Considerations**
+- What is a HashSet
+	- Hashset is mainly used wherever we need to find / access or search in constant time O(1)
+	- HashSet would only contain keys and not a key value pairs.
+	- It would always have unique elements. If a duplicate key comes in then it would overwrite that key.
+- We would be implementing using 2 different methods
+	- Double Hashing
+		- We have 2 hash functions.
+		- Put the key through first hash func -> put the key through another hash func in hope of avoiding collision.
+	- LinkedinList
 
-#### **What is a HashSet?**
-- A HashSet is mainly used when we need to find, access, or search for elements in constant time O(1).
-- A HashSet contains only keys, unlike a HashMap, which stores key-value pairs.
-- It always contains unique elements. If a duplicate key is inserted, it overwrites the existing key.
+- Can I use an array of size 10^6 to hold all the keys? Would that be a good way?
+	- No! A lot of space would be wasted. Imaging that you have just 3 keys but still would have allocated space for  10^6.
+-  Instead of the boolean array do I need an integer array?
+	- All we need to do is add a key, remove a key and tell whether the key is there or not.
+	- This could be done with a boolean array.
+		- Occupies less space than the integer value and hence no need for integer array.
+- What are the properties that the hashing function should have?
+	- It should be deterministic. Every time the same key is given it should return the same output.
 
-#### **Implementation Methods**
-We will implement the HashSet using two different approaches:
-1. **Double Hashing**
-   - Uses two hash functions.
-   - The key is processed through the first hash function and then through the second hash function to minimize collisions.
-2. **Linked List**
+**Double Hashing**
+>There is a hack for solving this. Lets say that we have been given the upperbound on the range that is 10^6. We take the square root of 10^6 which gives us 10^3. So for this problem we would use nested arrays and the primary array would have size 10^3 and the secondary array would have a size of 10^3 as well (So that with 10^3 X 10^3 we would be able to address all the unique keys that are present in the range)
 
-#### **Can We Use an Array of Size 10^6 to Hold All the Keys?**
-- No! A large amount of space would be wasted. Imagine having only three keys but still allocating space for 10^6 elements.
+- We would declare a primary array of size 10^3 to null and only initialize the secondary array as and when we want to.
+- The first hashing function would be equal to  **key % size of the primary array**.
+	- If we are doing a mod then we are operation in the range 0 to 999 if size of primary array is 10^3 or 1000.
+- So what should be the second hashing func? If we have the same hash func as the first one i.e key % size then lets take an example to see what problem we will run into.
+	- the firs hash func would give 3 as the answer for both 1003 and 2003.
+	- If we have now again the same hash function then inside the secondary array at index 3 (because first hash func led us here) we do the same hash func and get 3 again which would lead to collision of these 2 keys. We need to come up with a key that gives unique positions for 1003 and 2003.
+	- Second Hash func would be equal to:  **Key / size of secondary array**
+	- So now SecondHashFunc(1003) would be 1 and SecondHashFunc(2003) would be 2. Which are unique keys.
+- *There is still a problem with our approach?*
+	- Lets see what happens to the last element. 10^6
+	- First hash function would give 10^6 % 10^3 = 0, then the second hash func would give 10^6 / 10^3 would give 1000 but the array secondary index is limited upto 999. 
+	- How to solve? Have the first array as 1001 instead of 1000 shape to fix this. Would not lead to index array out of bounds exception.
 
----
+Time Complexity:
+- Add / Remove / Contains would all have time complexity of O(1)
 
-### **Double Hashing Approach**
-
-There is an optimization trick for solving this problem. Given that the upper bound of the key range is 10^6, we can take the square root, which is 10^3 (i.e., 1000). This allows us to use a nested array approach:
-- The **primary array** will have a size of 10^3 and will be initialized to null.
-
-#### **First Hashing Function**
-The first hash function is:
-
-PrimaryIndex = key % size of primary array
-
-- If the primary array size is 10^3 (1000), then the modulo operation ensures that the values fall within the range [0, 999].
-- Example: 1003 % 1000 = 3. We check index 3 in the primary array. If it is null, we create a secondary array.
-
-#### **Size of the Secondary Array**
-- The secondary array should also be of size 1000, ensuring that with a 10^3 × 10^3 structure, we can address all unique keys.
-
-#### **Second Hashing Function**
-If we use the same hash function for both steps, we may run into collisions. For example:
-- The first hash function maps both 1003 and 2003 to index 3 in the primary array.
-- If the second hash function also uses key % size, it will again return 3, causing a collision.
-
-To prevent this, we define the second hash function as:
-
-SecondaryIndex = key / size of secondary array
-
-- Example:
-  - SecondHashFunc(1003) = 1003 / 1000 = 1
-  - SecondHashFunc(2003) = 2003 / 1000 = 2
-  - Since the computed indices are unique, collisions are avoided.
-
----
-
-### **Boolean vs. Integer Array**
-- Do we need an integer array? **No**.
-- Our operations (add, remove, contains) can be efficiently handled with a **boolean array**.
-- A boolean array consumes **less space** than an integer array.
-
----
-
-### **Properties of a Good Hashing Function**
-1. **Deterministic** – The same key should always produce the same hash value.
-2. **Uniform Distribution** – It should distribute values evenly to minimize collisions.
-
----
-
-### **Handling Edge Cases**
-A problem arises with the last element, 10^6:
-- The first hash function gives:
-
-10^6 % 10^3 = 0
-
-- The second hash function gives:
-
-10^6 / 10^3 = 1000
-
-  However, our secondary array indices range from [0, 999], leading to an **index out of bounds** error.
-
-#### **Solution**
-- Instead of a **1000 × 1000** structure, **increase the primary array size to 1001**.
-- This ensures we avoid an **out-of-bounds exception**.
+Space Complexity:
+- Worst case would be O(10^6 + 1)
 
 #### Java Code
 
@@ -154,9 +117,7 @@ public boolean contains(int key) {
 
 ```
 
-
 #### Python Code
-
 ```python
 class MyHashSet:
 def __init__(self):
@@ -200,10 +161,5 @@ def _second_hashfn(self, key: int) -> int:
 # param_3 = obj.contains(key)
 ```
 
-
-Time Complexity:
-- Add / Remove / Contains would all have time complexity of O(1)
-Space Complexity:
-- Worst case would be O(10^6 + 1)
 
 
