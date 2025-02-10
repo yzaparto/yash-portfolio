@@ -41,5 +41,11 @@ export const notes: Note[] = [
     date: "2025.02.09",
     slug: "design-hashset",
     folder: "Data Structures"
+  },
+  { 
+    title: "Design Min Stack",
+    date: "2025.02.09",
+    slug: "design-minstack",
+    folder: "Data Structures"
   }
 ];
