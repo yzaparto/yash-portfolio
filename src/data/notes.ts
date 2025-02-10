@@ -36,4 +36,10 @@ export const notes: Note[] = [
     slug: "static-arrays",
     folder: "Data Structures"
   }
+  { 
+    title: "Design Hashset",
+    date: "2025.02.09",
+    slug: "design-hash",
+    folder: "Data Structures"
+  }
 ];
