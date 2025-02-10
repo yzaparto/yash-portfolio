@@ -33,6 +33,10 @@ Implement the MyHashMap class:
 - To get the value of the key
 	- Get the index of the array through hashing func.
 	- Traverse through the linkedlist and return the value.
+  
+#### This linked list chaining approach vs Double Hashing
+- This approach is better in terms of space complexity. We are creating the linked list nodes on demand as and when new elements come but in case of double hashing we end up allocating the secondary array size if we see even 1 element.
+
 
 #### Python Code
 ```python
