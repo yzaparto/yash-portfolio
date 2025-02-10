@@ -47,5 +47,17 @@ export const notes: Note[] = [
     date: "2025.02.09",
     slug: "design-minstack",
     folder: "Data Structures"
+  },
+  { 
+    title: "Implement Queue using Stacks",
+    date: "2025.02.09",
+    slug: "queue-using-stack",
+    folder: "Data Structures"
+  },
+  { 
+    title: "Design Hashmap",
+    date: "2025.02.09",
+    slug: "design-hashmap",
+    folder: "Data Structures"
   }
 ];
