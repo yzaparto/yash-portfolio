@@ -13,9 +13,12 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator 
 } from "@/components/ui/breadcrumb";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Copy, Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 const Note = () => {
+  const { toast } = useToast();
   const { noteId } = useParams();
   const note = notes.find((n) => n.slug === noteId);
 
@@ -31,6 +34,21 @@ const Note = () => {
     },
     enabled: !!noteId
   });
+
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast({
+        description: "Code copied to clipboard",
+        duration: 2000
+      });
+    } catch (err) {
+      toast({
+        description: "Failed to copy code",
+        variant: "destructive"
+      });
+    }
+  };
 
   if (!note) {
     return (
@@ -91,16 +109,33 @@ const Note = () => {
                 const match = /language-(\w+)/.exec(className || '');
                 const inline = className?.includes('inline');
                 
-                return !inline && match ? (
-                  <SyntaxHighlighter
-                    style={oneDark}
-                    language={match[1]}
-                    PreTag="div"
-                    {...props}
-                  >
-                    {String(children).replace(/\n$/, '')}
-                  </SyntaxHighlighter>
-                ) : (
+                if (!inline && match) {
+                  const code = String(children).replace(/\n$/, '');
+                  return (
+                    <div className="relative group">
+                      <div className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => copyToClipboard(code)}
+                          className="h-8 w-8 bg-background/50 backdrop-blur-sm"
+                        >
+                          <Copy className="h-4 w-4" />
+                        </Button>
+                      </div>
+                      <SyntaxHighlighter
+                        style={oneDark}
+                        language={match[1]}
+                        PreTag="div"
+                        {...props}
+                      >
+                        {code}
+                      </SyntaxHighlighter>
+                    </div>
+                  );
+                }
+                
+                return (
                   <code className={className} {...props}>
                     {children}
                   </code>
